@@ -1,6 +1,7 @@
 import './App.css'
 import NavBar from './components/NavBar.jsx'
 import Home from './components/Home.jsx'
+import About from './components/About.jsx'
 import SignIn from './components/SignIn.jsx'
 import SignUp from  './components/SignUp.jsx'
 import UserRole from './components/UserRole.jsx'
@@ -16,6 +17,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/about" element={<About/>}/>
         <Route path="/sign-in" element={<SignIn/>}/>
         <Route path="/sign-up" element={<SignUp/>}/>
         <Route path="/select-role" element={<UserRole />} />

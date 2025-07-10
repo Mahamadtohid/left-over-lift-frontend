@@ -65,11 +65,12 @@ function NavBar() {
                 <div className="md:hidden bg-white px-4 pb-4 flex flex-col gap-3 text-gray-700 font-medium">
                     <NavLink to="/" className={getLinkClass} onClick={toggleMenu}>Home</NavLink>
                     <NavLink to="/contact" className={getLinkClass} onClick={toggleMenu}>Contact</NavLink>
+                    <NavLink to="/about" className={getLinkClass} onClick={toggleMenu}>About</NavLink>
 
-                    <div>
-                        <button onClick={() => setShowAboutSubMenu(!showAboutSubMenu)} className="text-left w-full hover:text-green-600 transition">
+                    {/* <div> */}
+                        {/* <button onClick={() => setShowAboutSubMenu(!showAboutSubMenu)} className="text-left w-full hover:text-green-600 transition">
                             About
-                        </button>
+                        </button> */}
                         {/* {showAboutSubMenu && (
                             <div className="md:hidden bg-white px-4 pb-4 flex flex-col gap-3 text-gray-700 font-medium">
                                 <NavLink to="/about/team" className={getLinkClass} onClick={toggleMenu}>Our Team</NavLink>
@@ -77,7 +78,7 @@ function NavBar() {
                                 <NavLink to="/about/partners" className={getLinkClass} onClick={toggleMenu}>Partners</NavLink>
                             </div>
                         )} */}
-                    </div>
+                    {/* </div> */}
 
                     <NavLink to="/sign-in" className={getLinkClass} onClick={toggleMenu}>Sign In</NavLink>
                     <NavLink to="/select-role" className={getLinkClass} onClick={toggleMenu}>Sign Up</NavLink>

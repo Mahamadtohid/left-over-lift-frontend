@@ -1,10 +1,10 @@
 import Footer from './Footer'
 function Home() {
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-gradient-to-r from-green-200  to-white-100 animate-bg-slide bg-size-200 min-h-screen font-poppins transition-all duration-1000">
 
       {/* Hero Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-16 bg-white shadow-sm"
+      <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-16 shadow-sm border border-black-600"
 
       >
 
@@ -48,7 +48,7 @@ function Home() {
               Lifting <span className="text-orange-300">leftovers</span>, feeding <span className="text-green-300 text-8xl md:text-8xl">hope</span>
             </h2>
 
-            <button className="mt-12 px-8 py-3 bg-white text-black text-lg font-semibold rounded-full shadow-md hover:bg-green-100 transition-all duration-300">
+            <button className="mt-12 px-8 py-3 bg-gradient-to-r from-green-500 to-lime-500 text-black px-8 py-3 rounded-full text-lg font-semibold shadow hover:scale-105 transition-transform">
               Join Now
             </button>
           </div>

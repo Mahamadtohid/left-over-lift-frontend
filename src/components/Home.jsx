@@ -18,8 +18,8 @@ function Home() {
           </p>
           <div className="flex gap-4 justify-center md:justify-start">
 
-            <button className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition">Donate Food</button>
-            <button className="border border-green-600 text-green-600 px-6 py-3 rounded hover:bg-green-50 transition">Find Deals</button>
+            <button className="btn bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition">Donate Food</button>
+            <button className="btn border border-green-600 text-green-600 px-6 py-3 rounded hover:bg-green-50 transition">Find Deals</button>
           </div>
         </div>
 

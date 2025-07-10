@@ -56,6 +56,15 @@ export default {
         'size-200': '200% 200%',
       },
 
+      colors:{
+        'light-green' : '#74c69d',
+        'medium-green' : '#40916c',
+        'extra-green' : '#2d6a4f',
+        'dark-green' :  '#1b4332',
+
+
+      }
+
 
     },
   },

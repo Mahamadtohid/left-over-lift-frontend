@@ -1,17 +1,71 @@
 import React, { useState } from "react";
 import {Link} from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
+import { AppContext } from '../context/AppContext'
+import {useContext} from 'react'
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {isLoggeIn , setIsLoggedIn} = useContext(AppContext)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Add your login logic here (e.g. API call)
-  };
+  const [loginData , setLoginData] = useState({
+
+    id : uuidv4(),
+    email : "",
+    password : "",
+
+  }) 
+
+  function changeHandler(event){
+
+    setLoginData((prevData) => ({
+      ...prevData,
+      [event.target.name] : event.target.value
+    }))
+
+  }
+
+  const navigate = useNavigate();
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Email:", email);
+  //   console.log("Password:", password);
+    
+  //   if(email == "admin@gmail.com"){
+  //     setIsLoggedIn(true); 
+  //   }
+  //   else if(email== "business@gmail.com"){
+  //     setIsLoggedIn(true);
+  //   }
+  //   else{
+  //     if(email){
+  //       setIsLoggedIn(true);
+  //     }
+      
+  //   }
+  // };
+
+function handleSubmit(e){
+  e.preventDefault();
+  const { email, password, id } = loginData;
+
+  let role = "user";
+  let path = `/user/${id}`;
+  if (email === "admin@gmail.com") {
+    role = "admin";
+    path = `/admin/${id}`;
+  } else if (email === "business@gmail.com") {
+    role = "business";
+    path = `/business/${id}`;
+  }
+
+  setIsLoggedIn(true);
+
+  // Redirect to role-based dashboard
+  navigate(path, { state: { role } });
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-500">
@@ -29,8 +83,9 @@ function SignIn() {
               id="email"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
               placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={loginData.email}
+              onChange={changeHandler}
+              name="email"
               required
             />
           </div>
@@ -44,8 +99,9 @@ function SignIn() {
               id="password"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
               placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={loginData.password}
+              onChange={changeHandler}
+              name="password"
               required
             />
           </div>

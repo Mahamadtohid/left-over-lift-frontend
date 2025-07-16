@@ -14,6 +14,7 @@ import AuthForm from './components/AuthForm.jsx'
 
 
 import{Link , Routes , Route} from 'react-router-dom'
+import SignUpConsumer from './components/SingUpConsumer.jsx'
 
 function App() {
 
@@ -40,7 +41,7 @@ function App() {
 
 
         <Route path="/sign-up/business" element={<SignUp/>}/>
-        <Route path="/sign-up/consumer" element={<SignUp/>}/>
+        <Route path="/sign-up/consumer" element={<SignUpConsumer/>}/>
         <Route path="*"  element={<div>Oops Something Went Wrond</div>}/>
       </Routes>
       

@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { motion } from 'framer-motion';
 import Footer from './Footer';
 
-function SignUp() {
+function SignUpConsumer() {
   const [signUpData, setSignUpData] = useState({
     name: '',
     email: '',
@@ -14,42 +14,42 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Sign-Up Data:", signUpData);
-    // Add sign-up logic here
+    console.log('Sign-Up Data:', signUpData);
+    // Sign-up logic here
   };
 
-  const changeHandler = (event) => {
+  const changeHandler = (e) => {
     setSignUpData((prev) => ({
       ...prev,
-      [event.target.name]: event.target.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-white font-poppins">
       <main className="flex flex-1 flex-col lg:flex-row">
-        {/* Form Section */}
+        {/* Left Form Side */}
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-green-100 via-white to-green-50 p-8"
+          transition={{ duration: 0.7 }}
+          className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-bl from-green-100 via-white to-green-50 p-8"
         >
           <div className="bg-white/80 backdrop-blur-md shadow-xl rounded-2xl p-10 w-full max-w-md hover:scale-[1.01] transition-transform duration-500">
             <h1 className="text-center text-3xl font-bold text-green-700 mb-1">LeftOverLift</h1>
             <p className="text-center text-sm text-gray-600 mb-6 font-semibold">
-              Register your business to reduce food waste
+              Join the food rescue community
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-gray-700 font-medium mb-1">Business Name</label>
+                <label className="block text-gray-700 font-medium mb-1">Name</label>
                 <input
                   type="text"
                   name="name"
                   value={signUpData.name}
                   onChange={changeHandler}
-                  placeholder="Enter your business name"
+                  placeholder="Enter your name"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
                   required
                 />
@@ -124,25 +124,25 @@ function SignUp() {
           </div>
         </motion.div>
 
-        {/* Info Section */}
+        {/* Right Info Side */}
         <motion.div
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="hidden lg:flex w-full lg:w-1/2 bg-green-700 text-white p-12 items-center justify-center"
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="hidden lg:flex w-full lg:w-1/2 bg-green-700 text-gray-800 p-12 items-center justify-center"
         >
           <div className="space-y-6 max-w-md">
-            <h2 className="text-4xl font-extrabold leading-tight">Why Join as a Business?</h2>
-            <ul className="space-y-4 list-disc list-inside text-lg text-white/90">
-              <li>List surplus meals effortlessly</li>
-              <li>Boost your brand's sustainability image</li>
-              <li>Support your community with affordable food</li>
-              <li>Reduce waste and operational costs</li>
-              <li>Be a part of a green revolution</li>
+            <h2 className="text-4xl font-extrabold leading-tight text-white">Why Join as a Consumer?</h2>
+            <ul className="space-y-4 list-disc list-inside text-lg text-white">
+              <li>Access affordable and safe leftover food</li>
+              <li>Support your community and local businesses</li>
+              <li>Help reduce food waste and hunger</li>
+              <li>Find meals easily through location-based listings</li>
+              <li>Be part of a sustainable future</li>
             </ul>
             <img
-              src="/About/Food/About1.png"
-              alt="Business Helping Food"
+              src="/About/Food/About2.png"
+              alt="Consumer accessing food"
               className="w-full mt-6 rounded-xl shadow-lg"
             />
           </div>
@@ -154,4 +154,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpConsumer;

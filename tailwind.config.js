@@ -10,11 +10,17 @@ export default {
         poppins: ['Poppins', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
         custom: ['"Your Font Name"', 'sans-serif'],
+        fadeInUp: 'fadeInUp 0.8s ease-out',
       },
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-3deg)' },
           '50%': { transform: 'rotate(3deg)' },
+        },
+
+        fadeInUp: {
+          '0%': { opacity: 0, transform: 'translateY(20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
         },
 
         slidein: {
@@ -56,11 +62,11 @@ export default {
         'size-200': '200% 200%',
       },
 
-      colors:{
-        'light-green' : '#74c69d',
-        'medium-green' : '#40916c',
-        'extra-green' : '#2d6a4f',
-        'dark-green' :  '#1b4332',
+      colors: {
+        'light-green': '#74c69d',
+        'medium-green': '#40916c',
+        'extra-green': '#2d6a4f',
+        'dark-green': '#1b4332',
 
 
       }

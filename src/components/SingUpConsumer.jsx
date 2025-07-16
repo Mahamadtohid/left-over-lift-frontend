@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { motion } from 'framer-motion';
 import Footer from './Footer';
+import axios from 'axios';
 
 function SignUpConsumer() {
   const [signUpData, setSignUpData] = useState({
@@ -12,9 +13,28 @@ function SignUpConsumer() {
     confirmPassword: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Sign-Up Data:', signUpData);
+
+
+    try {
+      const response = await axios.post('http://localhost:8080/api/consumers/register',{
+
+        fullName:signUpData.name,
+        email:signUpData.email,
+        password:signUpData.password
+
+      });
+
+      console.log("User Registered Sucessfully...",response.data);
+      alert("User Registered Sucessfully...");
+      
+    } catch (error) {
+      console.error("Registraion faild :" ,error.response?.data || error.message);
+      alert("Registration Failed");
+      
+    }
     // Sign-up logic here
   };
 

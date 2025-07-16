@@ -10,6 +10,7 @@ import AppContext from './context/AppContext.jsx'
 import AdminDashBoard from './admin/AdminDashBoard.jsx'
 import BusinessDashBoard  from './businessHolder/BusinessDashboard.jsx'
 import UserDashBoard  from './user/UserDashBoard.jsx'
+import AuthForm from './components/AuthForm.jsx'
 
 
 import{Link , Routes , Route} from 'react-router-dom'

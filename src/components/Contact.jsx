@@ -1,6 +1,11 @@
-import { useState, useEffect } from "react"
-import {Link} from 'react-router-dom'
-import { ChevronDown, ChevronUp, Mail, Phone, MessageCircle, Send} from "lucide-react"
+import { useState, useEffect ,useRef} from "react"
+import { Link } from 'react-router-dom'
+import Footer from "./Footer"
+import { ChevronDown, ChevronUp, Mail, Phone, MessageCircle, Send } from "lucide-react"
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +23,28 @@ const Contact = () => {
   useEffect(() => {
     setIsLoaded(true)
   }, [])
+
+
+const mapRef = useRef();
+
+  useEffect(() => {
+    gsap.fromTo(
+      mapRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: mapRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, []);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -128,7 +155,7 @@ const Contact = () => {
       /\S+@\S+\.\S+/.test(formData.email) &&
       formData.subject &&
       formData.message.trim()
-    )   
+    )
   }
 
   return (
@@ -176,9 +203,8 @@ const Contact = () => {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 ${
-                        errors.firstName ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 ${errors.firstName ? "border-red-500" : "border-gray-300"
+                        }`}
                       placeholder="Your first name"
                     />
                     {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
@@ -193,9 +219,8 @@ const Contact = () => {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 ${
-                        errors.lastName ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 ${errors.lastName ? "border-red-500" : "border-gray-300"
+                        }`}
                       placeholder="Your last name"
                     />
                     {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
@@ -212,9 +237,8 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 ${
-                      errors.email ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 ${errors.email ? "border-red-500" : "border-gray-300"
+                      }`}
                     placeholder="your.email@example.com"
                   />
                   {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -229,9 +253,8 @@ const Contact = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 ${
-                      errors.subject ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 ${errors.subject ? "border-red-500" : "border-gray-300"
+                      }`}
                   >
                     <option value="">Select a topic</option>
                     <option value="general">General Inquiry</option>
@@ -253,9 +276,8 @@ const Contact = () => {
                     rows={5}
                     value={formData.message}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 resize-none group-hover:border-green-300 ${
-                      errors.message ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 resize-none group-hover:border-green-300 ${errors.message ? "border-red-500" : "border-gray-300"
+                      }`}
                     placeholder="Tell us how we can help you..."
                   ></textarea>
                   {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
@@ -264,11 +286,10 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={!isFormValid() || isSubmitting}
-                  className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 flex items-center justify-center gap-2 ${
-                    isFormValid() && !isSubmitting
+                  className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 flex items-center justify-center gap-2 ${isFormValid() && !isSubmitting
                       ? "bg-green-600 text-white hover:bg-green-700 hover:scale-105 hover:shadow-lg"
                       : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  }`}
+                    }`}
                 >
                   {isSubmitting ? (
                     <>
@@ -410,14 +431,32 @@ const Contact = () => {
             </div>
           </div>
         </div>
+
+
+        <section ref={mapRef} className="mb-20">
+          <h3 className="text-2xl font-bold text-green-700 text-center mb-6">Our Location</h3>
+          <div className="rounded-2xl overflow-hidden shadow-lg max-w-4xl mx-auto">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3822.454567633603!2d74.2599192749174!3d16.654121284113337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc0ffb509926fa9%3A0x9af43eb75ec2804!2sKIT&#39;s%20College%20of%20Engineering%20Kolhapur%20(Empowered%20Autonomous)!5e0!3m2!1sen!2sin!4v1752482059028!5m2!1sen!2sin"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Location Map"
+            ></iframe>
+          </div>
+        </section>
+
       </main>
 
       {/* Footer */}
-      <footer className="bg-green-600 text-white">
+      {/* <footer className="bg-green-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Brand Section */}
-            <div>
+          <div className="grid md:grid-cols-3 gap-8"> */}
+      {/* Brand Section */}
+      {/* <div>
               <h2 className="text-2xl font-bold mb-4">
                 <span className="text-white">LeftOver</span>
                 <span className="text-orange-300">Lift</span>
@@ -425,10 +464,10 @@ const Contact = () => {
               <p className="text-green-100 leading-relaxed">
                 Rescuing food. Feeding hope. Join the movement to reduce food waste across India.
               </p>
-            </div>
+            </div> */}
 
-            {/* Quick Links */}
-            <div>
+      {/* Quick Links */}
+      {/* <div>
               <h3 className="text-xl font-bold mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 <li>
@@ -452,13 +491,13 @@ const Contact = () => {
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
-            {/* Connect with Us */}
-            <div>
+      {/* Connect with Us */}
+      {/* <div>
               <h3 className="text-xl font-bold mb-4">Connect with Us</h3>
-              <div className="flex space-x-4">
-                {/* <Link
+              <div className="flex space-x-4"> */}
+      {/* <Link
                   href="#"
                   className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors duration-200"
                 >
@@ -476,7 +515,7 @@ const Contact = () => {
                 >
                   <Twitter className="w-5 h-5" />
                 </Link> */}
-                <Link
+      {/* <Link
                   href="#"
                   className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors duration-200"
                 >
@@ -484,14 +523,15 @@ const Contact = () => {
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          {/* Copyright */}
-          <div className="border-t border-green-500 mt-8 pt-8 text-center">
+      {/* Copyright */}
+      {/* <div className="border-t border-green-500 mt-8 pt-8 text-center">
             <p className="text-green-100">© 2025 LeftOverLeft. All rights reserved.</p>
           </div>
         </div>
-      </footer>
+      </footer> */}
+      <Footer />
     </div>
   )
 }

@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { motion } from 'framer-motion';
 import Footer from './Footer';
 import axios from 'axios';
 
 function SignUpConsumer() {
+
+  const navigate = useNavigate();
+
   const [signUpData, setSignUpData] = useState({
     name: '',
     email: '',
@@ -15,27 +18,22 @@ function SignUpConsumer() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Sign-Up Data:', signUpData);
-
 
     try {
-      const response = await axios.post('http://localhost:8080/api/consumers/register',{
-
-        fullName:signUpData.name,
-        email:signUpData.email,
-        password:signUpData.password
-
+      const response = await axios.post('http://localhost:8080/api/consumers/register', {
+        fullName: signUpData.name,
+        email: signUpData.email,
+        password: signUpData.password,
       });
 
-      console.log("User Registered Sucessfully...",response.data);
-      alert("User Registered Sucessfully...");
-      
+      console.log("Registration successful:", response.data);
+      alert("Registered successfully!");
+
+      navigate("/sign-in")
     } catch (error) {
-      console.error("Registraion faild :" ,error.response?.data || error.message);
-      alert("Registration Failed");
-      
+      console.error("Registration failed:", error.response?.data || error.message);
+      alert("Registration failed! Check the console.");
     }
-    // Sign-up logic here
   };
 
   const changeHandler = (e) => {

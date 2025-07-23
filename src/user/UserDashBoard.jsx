@@ -1,12 +1,13 @@
+import { useParams } from "react-router";
+function UserDashBoard() {
 
+    const { id } = useParams();
 
-function UserDashBoard(){
-
-    return(
+    return (
 
         <div>
             <h1>
-                This is an User DashBoard
+                Welcome User #{id}
             </h1>
         </div>
     )

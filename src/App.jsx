@@ -1,3 +1,4 @@
+
 import './App.css'
 import NavBar from './components/NavBar.jsx'
 import Home from './components/Home.jsx'
@@ -11,12 +12,15 @@ import AdminDashBoard from './admin/AdminDashBoard.jsx'
 import BusinessDashBoard  from './businessHolder/BusinessDashboard.jsx'
 import UserDashBoard  from './user/UserDashBoard.jsx'
 import AuthForm from './components/AuthForm.jsx'
+import { useNavigate } from 'react-router-dom'
 
 
 import{Link , Routes , Route} from 'react-router-dom'
 import SignUpConsumer from './components/SingUpConsumer.jsx'
 
 function App() {
+
+  const navigate = useNavigate();
 
   return (
     <div className='w-full h-screen'>
@@ -32,7 +36,7 @@ function App() {
 
 
         <Route path="/sign-in" element={<SignIn/>}/>
-        <Route path="/user/:userId"/>
+        {/* <Route path="/user/:userId"/> */}
 
 
         <Route path="/user/:userId" element={<UserDashBoard />} />

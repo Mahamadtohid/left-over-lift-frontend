@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import Footer from "./Footer";
+import axios from "axios";
 
 function SignIn() {
   const { isLoggeIn, setIsLoggedIn } = useContext(AppContext);
@@ -38,23 +39,54 @@ function SignIn() {
     }));
   }
 
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   const { email, password, id } = loginData;
+
+  //   let role = "user";
+  //   let path = `/user/${id}`;
+  //   if (email === "admin@gmail.com") {
+  //     role = "admin";
+  //     path = `/admin/${id}`;
+  //   } else if (email === "business@gmail.com") {
+  //     role = "business";
+  //     path = `/business/${id}`;
+  //   }
+
+  //   setIsLoggedIn(true);
+  //   navigate(path, { state: { role } });
+  // }
+
   function handleSubmit(e) {
     e.preventDefault();
-    const { email, password, id } = loginData;
+    const { email, password } = loginData;
 
-    let role = "user";
-    let path = `/user/${id}`;
-    if (email === "admin@gmail.com") {
-      role = "admin";
-      path = `/admin/${id}`;
-    } else if (email === "business@gmail.com") {
-      role = "business";
-      path = `/business/${id}`;
-    }
+    axios.post("http://localhost:8080/api/auth/login", {
+      email,
+      password,
+    })
+      .then((response) => {
+        const role = response.data.role; // assuming your backend sends role
+        const id = response.data.id; // assuming backend returns user ID
 
-    setIsLoggedIn(true);
-    navigate(path, { state: { role } });
+        setIsLoggedIn(true);
+
+        // Redirect based on role
+        if (role === "consumer") {
+          navigate(`/user/${id}`, { state: { role } });
+        } else if (role === "vendor") {
+          navigate(`/business/${id}`, { state: { role } });
+        } else {
+          console.error("Unknown role");
+        }
+      })
+      .catch((error) => {
+        alert("Login failed: " + (error.response?.data || "Server error"));
+      });
   }
+
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-100 to-green-300 px-4">
@@ -131,7 +163,7 @@ function SignIn() {
         </p>
       </div>
     </div>
-  
+
   );
 }
 

@@ -1,14 +1,14 @@
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-function BusinessDashBoard(){
+const BusinessDashboard = () => {
+  const { id } = useParams(); // ✅ get vendor id from route
 
-    return(
+  return (
+    <div>
+      <h1>Welcome Vendor #{id}</h1>
+    </div>
+  );
+};
 
-        <div>
-            <h1>
-                This is an Business DashBoard
-            </h1>
-        </div>
-    )
-}
-
-export default BusinessDashBoard;
+export default BusinessDashboard;

@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+#files
+api/auth.js
+components/GoogleLoginButton.jsx
+context/UserContext.jsx
+
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

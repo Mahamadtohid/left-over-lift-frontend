@@ -3,25 +3,66 @@ import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { motion } from 'framer-motion';
 import Footer from './Footer';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
+
+
+  const navigate = useNavigate();
+
   const [signUpData, setSignUpData] = useState({
     name: '',
+    ownerName: '',
     email: '',
     password: '',
     confirmPassword: '',
+    phone: '',
+    businessType: '',
+    address: '',
+    city: '',
+    state: '',
+    zipcode: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+
+      const response = await axios.post('http://localhost:8080/api/business/register', {
+        ownerName: signUpData.name,
+        email: signUpData.email,
+        password: signUpData.password,
+        businessType: signUpData.businessType,
+        businessName: signUpData.name,
+        address: signUpData.address,
+        city: signUpData.city,
+        state: signUpData.state,
+        phoneNumber: signUpData.phone,
+        zipCode: signUpData.zipcode,
+      });
+
+      console.log("Business Registration successful:", response.data);
+      alert("Business Registered successfully!");
+      
+    } catch (error) {
+      console.error("Business Registration failed:", error.response?.data || error.message);
+      alert("Business Registration failed! Check the console.");
+      
+    }
     console.log("Sign-Up Data:", signUpData);
-    // Add sign-up logic here
+    // Add your sign-up API logic here
+
+    navigate("/sign-in")
+
   };
 
   const changeHandler = (event) => {
+    const { name, value } = event.target;
     setSignUpData((prev) => ({
       ...prev,
-      [event.target.name]: event.target.value,
+      [name]: value,
     }));
   };
 
@@ -41,57 +82,78 @@ function SignUp() {
               Register your business to reduce food waste
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-gray-700 font-medium mb-1">Business Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={signUpData.name}
-                  onChange={changeHandler}
-                  placeholder="Enter your business name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
-                  required
-                />
+                <label className="block text-gray-700 font-medium mb-1">Business Name (Shop Name)</label>
+                <input type="text" name="name" value={signUpData.name} onChange={changeHandler}
+                  className="w-full px-4 py-2 border rounded-lg" required />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">Owner Name</label>
+                <input type="text" name="ownerName" value={signUpData.ownerName} onChange={changeHandler}
+                  className="w-full px-4 py-2 border rounded-lg" required />
               </div>
 
               <div>
                 <label className="block text-gray-700 font-medium mb-1">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={signUpData.email}
-                  onChange={changeHandler}
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
-                  required
-                />
+                <input type="email" name="email" value={signUpData.email} onChange={changeHandler}
+                  className="w-full px-4 py-2 border rounded-lg" required />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">Phone Number</label>
+                <input type="tel" name="phone" value={signUpData.phone} onChange={changeHandler}
+                  className="w-full px-4 py-2 border rounded-lg" required />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">Business Type</label>
+                <select name="businessType" value={signUpData.businessType} onChange={changeHandler}
+                  className="w-full px-4 py-2 border rounded-lg" required>
+                  <option value="">-- Select Type --</option>
+                  <option value="Bakery">Bakery</option>
+                  <option value="Restaurant">Restaurant</option>
+                  <option value="Grocery">Grocery</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">Address</label>
+                <input type="text" name="address" value={signUpData.address} onChange={changeHandler}
+                  className="w-full px-4 py-2 border rounded-lg" required />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-gray-700 font-medium mb-1">City</label>
+                  <input type="text" name="city" value={signUpData.city} onChange={changeHandler}
+                    className="w-full px-4 py-2 border rounded-lg" required />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-medium mb-1">State</label>
+                  <input type="text" name="state" value={signUpData.state} onChange={changeHandler}
+                    className="w-full px-4 py-2 border rounded-lg" required />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">Zipcode</label>
+                <input type="text" name="zipcode" value={signUpData.zipcode} onChange={changeHandler}
+                  className="w-full px-4 py-2 border rounded-lg" required />
               </div>
 
               <div>
                 <label className="block text-gray-700 font-medium mb-1">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  value={signUpData.password}
-                  onChange={changeHandler}
-                  placeholder="Create a password"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
-                  required
-                />
+                <input type="password" name="password" value={signUpData.password} onChange={changeHandler}
+                  className="w-full px-4 py-2 border rounded-lg" required />
               </div>
 
               <div>
                 <label className="block text-gray-700 font-medium mb-1">Confirm Password</label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={signUpData.confirmPassword}
-                  onChange={changeHandler}
-                  placeholder="Re-enter your password"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
-                  required
-                />
+                <input type="password" name="confirmPassword" value={signUpData.confirmPassword} onChange={changeHandler}
+                  className="w-full px-4 py-2 border rounded-lg" required />
               </div>
 
               <button
@@ -139,6 +201,11 @@ function SignUp() {
               <li>Support your community with affordable food</li>
               <li>Reduce waste and operational costs</li>
               <li>Be a part of a green revolution</li>
+              <li>List surplus meals effortlessly</li>
+              <li>Boost your brand's sustainability image</li>
+              <li>Support your community with affordable food</li>
+              <li>Reduce waste and operational costs</li>
+              <li>Be a part of a green revolution</li>
             </ul>
             <img
               src="/About/Food/About1.png"
@@ -148,7 +215,6 @@ function SignUp() {
           </div>
         </motion.div>
       </main>
-
       <Footer />
     </div>
   );
